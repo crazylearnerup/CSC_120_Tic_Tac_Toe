@@ -10,7 +10,6 @@ def board():
 board()
 
 def check_mark(board, symbol):
-
     valid_move = False
     while not valid_move:
         print(symbol + "'s move")
@@ -40,11 +39,26 @@ def check_column(board, col):
 
 
 def check_diagonal(board):
-
     symbol = board[0][0]
     for row in range(1, 3):
         if board[row][row] != symbol:
             return None
     return symbol
 
-   
+
+def check_win(board):
+    for row in range(3):
+        winner = check_row(board, row)
+        if winner:
+            return winner
+
+    for col in range(3):
+        winner = check_column(board, col)
+        if winner:
+            return winner
+    winner = check_diagonal(board)
+    if winner:
+        return winner
+    winner = check_diagonal(board)
+
+    return winner
